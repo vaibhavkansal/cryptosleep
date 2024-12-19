@@ -172,13 +172,13 @@ const Header = (props) => {
             <span className="navbar-toggler-icon "></span>
         </button>
 
-        <a href="index.html" className="navbar-brand mx-2 w-32">
+        <Link to="/" className="navbar-brand mx-2 w-32">
             {scrolled ? <>
             <p className="text-xl my-auto">{brandName.toUpperCase()}</p>
             </> : <>
             <img src="../../asset/logo5.svg"/>
             </>}
-            </a>
+            </Link>
         <div className=" ms-auto order-md-last d-flex">
             <Link className="btn w-100 text-wrap my-2 md-pe-2 px-md-3 mb-3 " to="/cart" ><img width="25" height="25"  src="../../asset/cart.svg" alt="cart"/></Link>
             <RenderButton/>
