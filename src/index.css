@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.navbar{
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+
+}
+
+.offcanvasCustomStart{
+    top: 0;
+    left: 0;
+    transition: 0.3s ease-in-out;
+
+    transform: translateX(-100%);
+}
