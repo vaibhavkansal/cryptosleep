@@ -1,17 +1,34 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import { auth } from "../utils/customfirebase";
+import { auth,fetchdata } from "../utils/customfirebase";
 import { useEffect } from "react";
 import {onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import {addUser, removeUser}  from "../utils/userslice";
+import { setProducts } from "../utils/productslice";
+import { Suspense, lazy } from "react";
+import ScrollToTop from "./subcomponents/ScrollToTop";
 import Header from "./Header";
 import HomeSection from "./HomeSection";
 import MattressSection from "./MattressSection";
 import CurtainSection from "./CurtainSection";
 import FurnitureSection from "./FurnitureSection";
 import AboutSection from "./AboutSection";
-import CartSection from "./cartSection";
+import CartSection from "./CartSection";
 import OrderHistory from "./OrderHistory";
+import MattressUploadSection from "./MattressUploadSection";
+import Footer from "./Footer";
+import ShimmerHeader from "./subcomponents/ShimmerHeader";
+import Product from "./Product";
+import ItemList from "./ItemList";
+import CurtainUploadSection from "./CurtainUploadSection";
+// const HomeSection = lazy(()=> import("./HomeSection"))
+// const MattressSection = lazy(()=> import("./MattressSection"))
+// const CurtainSection = lazy(()=> import("./CurtainSection"))
+// const FurnitureSection = lazy(()=> import("./FurnitureSection"))
+// const AboutSection = lazy(()=> import("./AboutSection"))
+// const CartSection = lazy(()=> import("./cartSection"))
+// const OrderHistory = lazy(()=> import("./OrderHistory"))
+// const UploadSection = lazy(()=> import("./UploadSection"))
 
 
 const Body = () => {
@@ -33,6 +50,22 @@ const Body = () => {
 
 
         },[])
+
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+    
+            const data = await fetchdata();
+            dispatch(setProducts(data));
+            
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        };
+        fetchProducts();
+      }, []);
+      
 
 
     const  appRouter = createBrowserRouter([
@@ -67,6 +100,22 @@ const Body = () => {
                 {
                     path:"/orderhistory",
                     element:<OrderHistory/>
+                },
+                {
+                    path:"/mattressupload",
+                    element:<MattressUploadSection/>
+                },
+                {
+                    path:"/curtainupload",
+                    element:<CurtainUploadSection/>
+                },
+                {
+                    path:"/itemlist",
+                    element:<ItemList/>
+                },
+                {
+                    path:"/:maincategory/:pid",
+                    element:<Product/>
                 }
             ]
 
@@ -78,7 +127,11 @@ const Body = () => {
         return (
           <>
             <Header brand="Cryptosleep"/>
+            <ScrollToTop /> {/* Add ScrollToTop here */}
+            <Suspense fallback={<ShimmerHeader/>}>
             <Outlet/>
+            </Suspense>
+            <Footer/>
           </>
        
         );

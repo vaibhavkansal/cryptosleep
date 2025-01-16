@@ -1,8 +1,12 @@
 import React from 'react'
+import { Blankspace } from "./subcomponents/OtherComponent";
 
 const AboutSection = () => {
   return (
-    <div>AboutSection</div>
+    <div>
+      <Blankspace/>
+      AboutSection
+      </div>
   )
 }
 

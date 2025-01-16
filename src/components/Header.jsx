@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { auth ,signOutfun } from "../utils/customfirebase";
 import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
 import { Link ,useLocation} from "react-router-dom";
+import { Blankspace } from "./subcomponents/OtherComponent";
 
 
 const Header = (props) => {
@@ -10,6 +11,7 @@ const Header = (props) => {
     const user = useSelector((state) => state.user);
     
     const numberRef = useRef(null);
+    const sentotpref = useRef(null);
     const closeModalref = useRef(null);
     const recapturedivref = useRef(null);
     const [optState,setoptState] = useState(false);
@@ -50,18 +52,27 @@ const Header = (props) => {
      
     
 
-  useEffect(() => {
-    const updatedValue = optState ? "123456" : "9876543210";
-    const updatedValuetext = optState ? "Enter OTP":"Enter Login Mobile Number";
-    setplaceholder(updatedValue);
-    setotStatetext(updatedValuetext);
+    useEffect(() => {
+        const updatedValue = optState ? "OTP" : "mobil no.";
+        const updatedValuetext = optState ? "Enter OTP":"Enter Login Mobile Number";
+        setplaceholder(updatedValue);
+        setotStatetext(updatedValuetext);
 
-  }, [optState]);
+    }, [optState]);
 
     function sendOtp(){
         var number = numberRef.current.value;
     if(number > 1000000000 && number < 10000000000){
       console.log(number);
+      sentotpref.current.innerHTML = `<svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                                        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+                                        </svg>
+                                        Loading...`
+                                        if (sentotpref.current) {
+                                            sentotpref.current.disabled = true; // Disable the button
+                                          }
+
       const appVerifier = window.recaptchaVerifier;
       var phoneNumber = '+91' + number.toString();
       signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
@@ -69,10 +80,17 @@ const Header = (props) => {
       console.log("OTP send successfully")
       numberRef.current.value = "";
       numberRef.current?.focus();
-
+      sentotpref.current.innerHTML = "Send OTP";
+      if (sentotpref.current) {
+        sentotpref.current.disabled = false; // Disable the button
+      }
       setoptState(true);
     }).catch((error) => {
       console.log("error",error);
+      if (sentotpref.current) {
+        sentotpref.current.disabled = false; // Disable the button
+      }
+      sentotpref.current.innerHTML = "Send OTP"
       alert(error);
     });
 
@@ -91,6 +109,8 @@ const Header = (props) => {
         confirmationResult.confirm(code).then((result) => {
         const user = result.user;
         console.log(user)
+        setoptState(false);
+
         closeModalref.current?.click();
         if (recapturedivref.current) {
             recapturedivref.current.innerHTML = "";
@@ -120,7 +140,7 @@ const Header = (props) => {
         else{
             {/* if user is logged out  */}
             return(
-            <button type="button" className={`btn btn-danger ${scrolled ? "btn-dark" : ""} px-4 my-2`} id="loginbutton" data-bs-toggle="modal" data-bs-target="#LoginModal" >Login</button>
+            <button type="button"  className={`btn btn-danger ${scrolled ? "btn-dark" : ""} px-4 my-2`} id="loginbutton" data-bs-toggle="modal" data-bs-target="#LoginModal" >Login</button>
             )
         }
     }
@@ -135,7 +155,7 @@ const Header = (props) => {
         <div className="modal-content"  >
             <div className="modal-header">
             <h5 className="modal-title">Login To Our Website</h5>
-                <button id="closemodal" ref={closeModalref} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button id="closemodal" onClick={()=>{setoptState(false)}} ref={closeModalref} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
                 <h5 className="mb-3">{optStatetext}</h5>
@@ -153,7 +173,7 @@ const Header = (props) => {
             <div className="modal-footer">
                 <div className="w-full flex">
                     {!optState ? <>
-                        <button type="button" onClick={sendOtp} className="btn btn-primary justify-center px-4 mx-auto">Send OTP</button>
+                        <button type="button" ref={sentotpref} onClick={sendOtp} className="btn btn-primary justify-center px-4 mx-auto">Send OTP</button>
 
                     </> : <>
                     <button type="button" onClick={verifyOtp} className="btn btn-primary justify-center px-4 mx-auto">Verify</button>
@@ -165,7 +185,7 @@ const Header = (props) => {
             </div>
             </div>
     </div>
-<nav id= "navbarHeaderDiv" className={`navbar ${scrolled ? 'navbar-dark bg-dark' : ''} navbar-expand-md fixed-top opacity-100 p-0` } >
+<nav id= "navbarHeaderDiv" className={`navbar ${scrolled ? 'navbar-dark bg-dark' : ''} navbar-expand-md fixed-top  p-0` } >
     <div className="container-fluid justify-content-between flex-nowrap">
 
         <button type="button" className="navbar-toggler border-0"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -206,8 +226,6 @@ const Header = (props) => {
 </nav>
     <div id="recaptrediv" ref={recapturedivref}></div>
 </div>
-
-
 
 
 

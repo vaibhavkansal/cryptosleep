@@ -1,20 +1,21 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {  signOut } from "firebase/auth";
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCr315kMXiU1G1y9AnxVRnDh6LeFEGLl_A",
-  authDomain: "sheelafoamhouse-ec200.firebaseapp.com",
-  projectId: "sheelafoamhouse-ec200",
-  storageBucket: "sheelafoamhouse-ec200.firebasestorage.app",
-  messagingSenderId: "351704864776",
-  appId: "1:351704864776:web:65b877154f71139c83d9bd",
-  measurementId: "G-YXTMDFJ1CX"
+  apiKey: "AIzaSyAWo5uEogARmWXnXi_zC9z5rB2dnwz6wqo",
+  authDomain: "cryptosleep-furniture.firebaseapp.com",
+  projectId: "cryptosleep-furniture",
+  storageBucket: "cryptosleep-furniture.firebasestorage.app",
+  messagingSenderId: "484262202748",
+  appId: "1:484262202748:web:2b18eaed53976b16b6e8f9",
+  measurementId: "G-NP4017YEFW"
 };
 
-const app = initializeApp(firebaseConfig);
-
+export const app = initializeApp(firebaseConfig);
+const db = getFirestore();
 export const auth = getAuth(app);
 export const signOutfun = ()=> {    
   signOut(auth).then(() => {
@@ -22,4 +23,29 @@ export const signOutfun = ()=> {
   }).catch((error) => {
     console.log(error);
   });
+}
+
+
+export const fetchdata = async () =>{
+  try {
+    const querySnapshot = await getDocs(collection(db, "products"));
+
+    const fetchedProducts = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return(fetchedProducts);
+  } catch (error) {
+    console.error("Error fetching products", error);
+    return({})
+  }
+
+
+}
+
+
+export const addForm = async (form)=>{
+  const docRef = await addDoc(collection(db, "Forms"), form);
+  console.log("Form added successfully")
+
 }

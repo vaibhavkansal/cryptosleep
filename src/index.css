@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .navbar{
     transition: background-color 0.3s; /* Smooth transition for background color change */
 
@@ -12,4 +13,44 @@
     transition: 0.3s ease-in-out;
 
     transform: translateX(-100%);
+}
+
+.box-icon img{
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.box-icon p {
+    line-height: 17px;
+    color: #bbbbbb;
+}
+
+.backgroundimage {
+    background-image: url('https://lh6.googleusercontent.com/t9f-MvYk1k8DLtEMuI1OZiqvF0NPS7FmuAjY01XJ2DqSyXDJZL28pLhXGSsLhPpQR2D__3UJ-WpEAIlQb56DpwQ=w16383');
+    background-size: cover;
+    background-position: center center;
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .product-features,
+.product-pricing {
+    margin: 15px 0;
+}
+
+.price {
+    font-size: 20px;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.mrp {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 10px;
+}
+
+.discount {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-left: 10px;
 }
