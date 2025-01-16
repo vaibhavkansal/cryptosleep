@@ -49,7 +49,8 @@ const MattressPage = () => {
   return (
     <>
     {/* first we will create product image carousal  */}
-    {productjson.length > 0 && ( <div>
+    {productjson.length > 0 && (
+    <div>
     
     <div className="sm:flex">
     <ProductImage product={productjson[0]} className="sm:w-1/2"/>

@@ -52,12 +52,10 @@ const ProductImage = ({ product }) => {
             ref={mainRef}
             options={{
               type: "fade",
-              heightRatio: 0.7,
               pagination: false,
               autoplay: true,
               rewind: true,
               arrows: false,
-              cover: true,
             }}
             id="main-slider"
           >
@@ -66,7 +64,7 @@ const ProductImage = ({ product }) => {
                 <img
                   src={img}
                   alt={"Slide " + index}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  style={{ objectFit: "contain" }}
                 />
               </SplideSlide>
             ))}
@@ -110,6 +108,10 @@ const ProductImage = ({ product }) => {
     </>
   );
 };
+
+
+
+export default ProductImage;
 
 export const ProductDetail = (props) => {
   const product1 = props.product;
@@ -382,10 +384,6 @@ export const ProductDetail = (props) => {
     </>
   );
 };
-
-export default ProductImage;
-
-
 
 export const ProductDescription = ({product}) =>{
 
