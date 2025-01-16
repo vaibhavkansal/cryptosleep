@@ -9,26 +9,33 @@ import { Suspense, lazy } from "react";
 import ScrollToTop from "./subcomponents/ScrollToTop";
 import Header from "./Header";
 import HomeSection from "./HomeSection";
-import MattressSection from "./MattressSection";
-import CurtainSection from "./CurtainSection";
-import FurnitureSection from "./FurnitureSection";
 import AboutSection from "./AboutSection";
 import CartSection from "./CartSection";
-import OrderHistory from "./OrderHistory";
-import MattressUploadSection from "./MattressUploadSection";
 import Footer from "./Footer";
 import ShimmerHeader from "./subcomponents/ShimmerHeader";
-import Product from "./Product";
-import ItemList from "./ItemList";
-import CurtainUploadSection from "./CurtainUploadSection";
+// import Product from "./Product";
+// import CurtainUploadSection from "./CurtainUploadSection";
+// import MattressUploadSection from "./MattressUploadSection";
+// import ItemList from "./ItemList";
+// import OrderHistory from "./OrderHistory";
+// import MattressSection from "./MattressSection";
+// import CurtainSection from "./CurtainSection";
+// import FurnitureSection from "./FurnitureSection";
+
+
+
 // const HomeSection = lazy(()=> import("./HomeSection"))
-// const MattressSection = lazy(()=> import("./MattressSection"))
-// const CurtainSection = lazy(()=> import("./CurtainSection"))
-// const FurnitureSection = lazy(()=> import("./FurnitureSection"))
 // const AboutSection = lazy(()=> import("./AboutSection"))
 // const CartSection = lazy(()=> import("./cartSection"))
-// const OrderHistory = lazy(()=> import("./OrderHistory"))
-// const UploadSection = lazy(()=> import("./UploadSection"))
+const Product = lazy(()=> import("./Product"))
+const CurtainUploadSection = lazy(()=> import("./CurtainUploadSection"))
+const MattressUploadSection = lazy(()=> import("./MattressUploadSection"))
+const ItemList = lazy(()=> import("./ItemList"))
+const OrderHistory = lazy(()=> import("./OrderHistory"))
+const MattressSection = lazy(()=> import("./MattressSection"))
+const CurtainSection = lazy(()=> import("./CurtainSection"))
+const FurnitureSection = lazy(()=> import("./FurnitureSection"))
+
 
 
 const Body = () => {

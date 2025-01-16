@@ -97,7 +97,7 @@ export const ProductContentCurtains = () => {
                 <div className="col-12 col-md-5 flex align-middle items-center md:order-2">
                     <div>
                     <h2 className='text-4xl font-extrabold text-gray-800'>Noise Reducing Blackout Curtains</h2>
-                    <p className='text-gray-600 my-3'>Cryptosleep Blackout Curtains are soundproof and designed to enhance your home with their blackout capabilities. Made of high-quality, thermal-insulated fabric, these Cryptosleep curtains also help in regulating room temperature, making them both functional and stylish additions to your home decor.</p>
+                    <p className='text-gray-600 my-3'>Cryptosleep Blackout Curtains are sound resistant and designed to enhance your home with their blackout capabilities. Made of high-quality, thermal-insulated fabric, these Cryptosleep curtains also help in regulating room temperature, making them both functional and stylish additions to your home decor.</p>
                     <div className="cstm-btn d-none d-sm-block  ">
                         <Link to="/curtain">
                         <button type="button" className="text-yellow-500  hover:text-black border border-yellow-500  bg-gray-950 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">View All</button>

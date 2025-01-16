@@ -69,10 +69,6 @@ export const MattressSizeModal = (props) => {
 		Diwan: [[72,48],[75,48],[78,48]],
 		Queen: [[72,60],[72,66],[75,60],[75,66],[78,60],[78,66]],
 		King: [[72,70],[72,72],[75,70],[75,72],[78,70],[78,72]],
-		// Single: ['72" X 30"','72" X 35"','72" X 36"','72" X 42"','75" X 30"','75" X 35"','75" X 36"','75" X 42"','78" X 30"','78" X 35"','78" X 36"','78" X 42"' ],
-		// Diwan: ['72" X 48"', '75" X 48"','78" X 48"'],
-		// Queen: ['72" X 60"','72" X 66"','75" X 60"','75" X 66"','78" X 60"','78" X 66"'],
-		// King: ['72" X 70"','72" X 72"','75" X 70"','75" X 72"','78" X 70"','78" X 72"'],
 		Custom: [],
 	};
 	const thickness = [5,6,8,10];
@@ -183,6 +179,116 @@ export const MattressSizeModal = (props) => {
 
 				</div>
 
+                
+            </div>
+            <div className="modal-footer">
+                <div className="w-full flex">
+				<button onClick={setsize} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+						Confirm Variant
+					</button>
+                </div>
+            </div>
+
+            </div>
+            </div>
+    </div>
+	);
+}
+
+export const CurtainSizeModal = (props) => {
+
+	const product = props.product;
+	const setproduct = props.setproduct;
+	const closeModalref = useRef(null);
+	const lengthref = useRef(null);
+	const [selectedCategory, setselectedCategory] = useState('Door');
+	const [selectedVariant, setSelectedVariant] = useState(7);
+
+	const sizecategory = {
+		Window: [5,7,8,9],
+		Door: [5,7,8,9],
+		Custom: [],
+	};
+
+	const handleSizeClick = (size) => {
+		setselectedCategory(size);
+		setSelectedVariant(''); // Reset variant when size changes
+		};
+
+	const handleVariantClick = (variant) => {
+			console.log(variant)
+		setSelectedVariant(variant);
+		};
+	
+	const setsize = ()=>{
+			const finalsize = selectedCategory + " | "+ selectedVariant +' Ft OR '+ selectedVariant*12 + ' In';
+			const newMrp = parseInt(product.unitRateMRP) *  selectedVariant;
+			const newSP = parseInt(product.unitRateSellingP) *  selectedVariant;
+			console.log(finalsize,parseInt(product.unitRateMRP),newMrp,newSP)
+			setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
+			closeModalref.current?.click();		
+		}
+	
+
+	return (
+	   <div className="modal fade" id="SizeModal" tabIndex="-1" aria-labelledby="LoginModalLabel" aria-hidden="true">
+        <div id="loginmodaldialog" className="modal-dialog modal-xl modal-dialog-centered">
+        <div className="modal-content"  >
+            <div className="modal-header">
+            <h5 className="modal-title">Choose a Variant			</h5>
+                <button id="closemodal" ref={closeModalref} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+				<div className='text-gray-600 font-semibold m-3'>Size Category</div>
+				<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5  gap-y-2 gap-x-3">
+				{Object.keys(sizecategory).map((category) => (
+
+					
+					<button
+						key={category}
+						onClick={() => handleSizeClick(category)}
+						className={`md:px-4 py-2 rounded-md border border-solid text-center ${
+							selectedCategory === category ? 'bg-violet-700 text-white' : 'bg-white text-gray-800'
+						}`}
+					>
+						{category}
+					</button>
+				))}	
+				</div>
+				<div>
+
+					{selectedCategory ==="Custom" ?<div className="text-gray-600 font-semibold m-3">Dimension (In Inches)</div> :<div className="text-gray-600 font-semibold m-3">Variants for {selectedCategory}</div>}
+					<div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-y-2 gap-x-3">
+
+	
+						{sizecategory[selectedCategory].map((variant) => (
+						<button
+							key={variant} 
+							onClick={() => handleVariantClick(variant)}
+							className={`md:px-4 py-2 rounded-md border border-solid text-center ${
+							selectedVariant  === variant ? 'bg-violet-800 text-white' : 'bg-white text-gray-800'
+							}`}
+						>
+							{variant + ' Ft'}
+						</button>
+
+						))}
+
+					</div>
+					{selectedCategory==="Custom" && <>
+
+						<div className="w-full">
+							<div className="flex flex-row-wrap gap-3">
+							<input type='number' ref={lengthref} onChange={()=>(setSelectedVariant(lengthref.current?.value/12))} placeholder="Height" className="w-1/2 p-2  text-center border-2 border-solid rounded-lg border-violet-700"/>
+							</div>
+
+						</div>
+								
+								</>}
+
+				</div>
+
+		
                 
             </div>
             <div className="modal-footer">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ProductImage, { BedCompatible, LayerInfo, ProductDescription, ProductDetail } from './ProductImage'
+import ProductImage, { BedCompatible, CurtainDetail, LayerInfo, ProductDescription, ProductDetail } from './ProductImage'
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -27,7 +27,7 @@ const CurtainPage = () => {
           <div>
             <div className="sm:flex">
                 <ProductImage product={productjson[0]} className="sm:w-1/2"/>
-                <ProductDetail product={productjson[0]} className="sm:w-1/2"/>
+                <CurtainDetail product={productjson[0]} className="sm:w-1/2"/>
                 </div>
 
 

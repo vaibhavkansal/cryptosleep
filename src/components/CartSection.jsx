@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { Blankspace } from './subcomponents/OtherComponent'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addtoCart, removeItem } from '../utils/cartSlice';
 
 const CartSection = () => {
 
   const cart = useSelector((state) => state.cart);
   const [items,setitems] = useState([]);
-  const [carttoal,setcarttotal] = useState(0);
+  const [mrptoal,setmrptoal] = useState(0);
+  const [savetotal,setsavetotal] = useState(0);
+  const [carttotal,setcarttotal] = useState(0);
+  const dispatch = useDispatch();
+
 
   useEffect(()=>{
     setitems(cart['items']);
     var t = 0;
-    cart['items'].map((it)=>(
-      t =t + it.ssellingPrice * it.cartQuantity
-    ))
+    var m =0;
+    var save =0;
+    cart['items'].map((it)=>{
+      
+        m= m+ it.mrp * it.cartQuantity;
+        t= t+ it.sellingPrice * it.cartQuantity;
+  
+    })
+    setmrptoal(m);
+    setsavetotal(m-t);
     setcarttotal(t);
 
   },[cart])
@@ -26,14 +38,10 @@ const CartSection = () => {
             <div className="container-lg p-5" style={{"min-height":"70vh"}}>
               <div className="grid grid-cols-3 gap-4">
 
-                <div className="col-span-2"> 
-                  {/* item list */}
-                  {console.log(items)}
-                  {console.log('Type of items:', typeof items)}
-                  {console.log('Is items an array?', Array.isArray(items))}
-
+                <div className="col-span-3 md:col-span-2"> 
+                  
                   {items && items.map((cartitem, index) => (
-                    <div className="card" key={index}>
+                    <div className="card my-3 shadow-2xl" key={index}>
                       <div className="card-body">
 
                         <div className="grid grid-cols-3">
@@ -43,6 +51,7 @@ const CartSection = () => {
                           </div>
                           <div className="col-span-2">
                           <h5 className="card-title">{cartitem.name}</h5>
+                          <h5 className="text-base text-gray-600">{cartitem.about}</h5>
                           <div className="product-pricing">
                               <span className="price">₹{cartitem.sellingPrice}</span>
                               <span className="mrp">₹{cartitem.mrp}</span>
@@ -53,7 +62,30 @@ const CartSection = () => {
                             </div>    
 
                           <p className="card-text text-xl"><strong>Size:</strong> {cartitem.OrderSize}</p>
-                          <p className="card-text text-xl"><strong>Quatity:</strong> {cartitem.cartQuantity} Pcs</p>
+
+                          {cartitem.stichingType && (<p className="card-text text-xl"><strong>Stiching Type :</strong> {cartitem.stichingType}</p>)}
+
+
+                          <div className=''>
+
+                          <div className="card-text flex  text-xl"><strong className='py-1'>Quatity:</strong>  
+                              <div className=" flex mx-2 max-w-[8rem]">
+                                  <button type="button" onClick={()=>(dispatch(removeItem(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                      <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                      </svg>
+                                  </button>
+                                  <p className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-3">{cartitem.cartQuantity}</p>
+                                  <button type="button" onClick={()=>(dispatch(addtoCart(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                      <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                      </svg>
+                                  </button>
+                              </div>
+                              <strong className='py-1'>PCS</strong>  
+                              </div>
+                          </div>
+                          
                           <p className="card-text text-xl"><strong>Warranty:</strong> {cartitem.warranty} years</p>
                         
                           </div>
@@ -64,26 +96,33 @@ const CartSection = () => {
                   
 
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-3 md:col-span-1">
                   {/* total List */}
                   
                   <div className="card">
                     <div className="card-body">
-                    {items && items.map((cartitem, index) => (
-                    <>
+                
                     <div>
                       <p className='text-xl text-gray-500 font-semibold'>Order Summary</p>
                       <div className="grid grid-cols-2">
-                        <p className='text-xl text-gray-500 font-semibold'>Total</p>
-                        <p className='text-xl font-semibold'>{carttoal}</p>
+                        <p className='text-xl text-gray-500 font-semibold'>Total Mrp</p>
+                        <p className='text-xl font-semibold text-green-400'>{mrptoal}</p>
                       </div>
-                      <button className='btn btn-primary w-full'> Proceed To Checkout</button>
+                      <div className="grid grid-cols-2">
+                        <p className='text-xl text-gray-500 font-semibold'>Total Save</p>
+                        <p className='text-xl font-semibold text-red-500'>{savetotal}</p>
+                      </div>
+                      <hr></hr>
+                      <div className="grid grid-cols-2">
+                        <p className='text-xl text-gray-500 font-semibold'>Total</p>
+                        <p className='text-xl font-semibold text-green-700'>{carttotal}</p>
+                      </div>
+                      <button className='btn btn-success w-full'> Proceed To Checkout</button>
 
                     </div>
                     
                     
-                    </>
-                  ))}
+                 
                     </div>
                   </div>
                 </div>
