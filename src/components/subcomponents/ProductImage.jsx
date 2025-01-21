@@ -350,14 +350,14 @@ export const ProductDetail = (props) => {
 
 
         <div className="flex  gap-5">
-          <div className="hidden sm:block sm:basis-1/2 sm:mt-4 ">
+          <div className="hidden sm:block w-1/2 sm:mt-4 ">
           <div className="font-bold">Get it by : <span className="text-green-800">{devdate}</span></div>
           <div className="flex  border-4 border-violet-800  h-12 ps-3 rounded-lg">
-          <input className="focus:outline-none " type="text" ref={pincodeInput} placeholder="Pincode"/>
+          <input className="focus:outline-none w-full" type="text" ref={pincodeInput} placeholder="Pincode"/>
           <button className="px-2 text-violet-800" onClick={checkPincode}>CHECK</button>
           </div>
           </div>
-          <div className="basis-8/12 sm:basis-1/2 sm:mt-4">
+          <div className="w-full sm:w-1/2 sm:mt-4">
           <div className="font-bold">Choose Size</div>
           <MattressSizeModal product={product} setproduct={setproduct}/>
 

@@ -46,10 +46,10 @@ const CartSection = () => {
 
                         <div className="grid grid-cols-3">
 
-                          <div className="">
-                          <img src={cartitem.image} alt={cartitem.name} className="card-img-top p-3" />
+                          <div className="col-span-3 md:col-span-1">
+                          <img src={cartitem.image} alt={cartitem.name} className=" card-img-top p-3" />
                           </div>
-                          <div className="col-span-2">
+                          <div className="col-span-3 md:col-span-2">
                           <h5 className="card-title">{cartitem.name}</h5>
                           <h5 className="text-base text-gray-600">{cartitem.about}</h5>
                           <div className="product-pricing">
@@ -70,13 +70,13 @@ const CartSection = () => {
 
                           <div className="card-text flex  text-xl"><strong className='py-1'>Quatity:</strong>  
                               <div className=" flex mx-2 max-w-[8rem]">
-                                  <button type="button" onClick={()=>(dispatch(removeItem(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                  <button type="button" onClick={()=>(dispatch(removeItem(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-1 md:p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                       <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                       </svg>
                                   </button>
                                   <p className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 px-3">{cartitem.cartQuantity}</p>
-                                  <button type="button" onClick={()=>(dispatch(addtoCart(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                  <button type="button" onClick={()=>(dispatch(addtoCart(cartitem)))} className="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-1 md:p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                                       <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                       </svg>
