@@ -11,118 +11,16 @@ const HomeSection = () => {
   const products = useSelector((state) => state.products);
 
   function getProductsByCategory(categoryName) {
-    return products.filter(product => product.category.includes(categoryName));
-}
+    if (products.length >0){
+      return products.filter(product => product.category.includes(categoryName));
+    }
+    else{
+      return ([])
+    }
+  }
 
   const imgPath = ["../asset/banner2.png","../asset/banner4.png","../asset/banner3.png","../asset/banner5.png"] // banner image paths
-  // var mattresslist = [{
-  //   "id":"qasdw3e2swx",
-  //   "image":"https://kurlon.com/cdn/shop/files/631979207-spine-ortho-1.jpg?v=1727336168",
-  //   "name":"Soft Eco Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"sdwfet4fecd",
-  //   "image":"https://www.dreamsonlinestore.in/wp-content/uploads/2023/12/Smart-Cozy-Mattress-400x400.jpg",
-  //   "name":"Smart Soft Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasde2swx",
-  //   "image":"https://www.dreamsonlinestore.in/wp-content/uploads/2023/12/Dr.-Ortho-Spine-Care-Mattress-400x400.jpg",
-  //   "name":"comport pro Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasdw3e2swx",
-  //   "image":"https://kurlon.com/cdn/shop/files/MG_7242_496acc24-9db6-4d23-bcbe-5c76c3dd9818.jpg?v=1726647027",
-  //   "name":"Comfort Plus Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // }]
-  // const curtainlist = [{
-  //   "id":"qasdw3e2swx",
-  //   "image":"./asset/curtain1.jpg",
-  //   "name":"Soft Eco Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"sdwfet4fecd",
-  //   "image":"./asset/blackout1.jpg",
-  //   "name":"Smart Soft Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasde2swx",
-  //   "image":"./asset/curtain2.jpg",
-  //   "name":"comport pro Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasdw3e2swx",
-  //   "image":"./asset/curtain3.jpg",
-  //   "name":"Comfort Plus Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // }]
-  // const blackoutlist = [{
-  //   "id":"qasdw3e2swx",
-  //   "image":"./asset/blackout1.jpg",
-  //   "name":"Soft Eco Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"sdwfet4fecd",
-  //   "image":"./asset/blackout2.jpg",
-  //   "name":"Smart Soft Mattress",
-  //   "about":"Soft Mattress which is for adults",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasde2swx",
-  //   "image":"./asset/blackout3.jpg",
-  //   "name":"comport pro Mattress",
-  //   "about":"Blackout Curtain heat block",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // },
-  // {
-  //   "id":"qasdw3e2swx",
-  //   "image":"./asset/blackout4.jpg",
-  //   "name":"Comfort Plus Mattress",
-  //   "about":"Blackout Curtain heat block",
-  //   "mrp": "9876",
-  //   "sellingPrice": "6223",
-  //   "review":"130"
-  // }]
+  
   const [mattresslist, setMattressList] = useState([]);
   const [curtainlist, setCurtainList] = useState([]);
   const [blackoutlist, setBlackoutList] = useState([]);

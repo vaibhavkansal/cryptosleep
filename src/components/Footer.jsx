@@ -136,13 +136,13 @@ const Footer = () => {
             <div className="md:flex md:justify-center mt-10">
               <div className="flex flex-col md:flex-row px-3 sm:gap-5 md:gap-8 font-serif">
                 <div className='flex'>
-                    <p className="basis-1/2 md:text-xl">Shipping Policy</p>
-                    <p className="basis-1/2 md:text-xl">Return Policy</p>
+                    <a className="basis-1/2 md:text-xl text-white no-underline" href="https://merchant.razorpay.com/policy/PmTzc91QUf9q0L/shipping">Shipping Policy</a>
+                    <a className="basis-1/2 md:text-xl text-white no-underline" href="https://merchant.razorpay.com/policy/PmTzc91QUf9q0L/refund">Return Policy</a>
                 </div>
 
                 <div className='flex'>
-                    <p className="basis-1/2 md:text-xl">Privacy Policy</p>
-                    <p className="basis-1/2 md:text-xl">Terms & Conditions</p>
+                    <a className="basis-1/2 md:text-xl text-white no-underline" href='https://merchant.razorpay.com/policy/PmTzc91QUf9q0L/privacy'>Privacy Policy</a>
+                    <a className="basis-1/2 md:text-xl text-white no-underline" href='https://merchant.razorpay.com/policy/PmTzc91QUf9q0L/terms'>Terms & Conditions</a>
                 </div>
                
  

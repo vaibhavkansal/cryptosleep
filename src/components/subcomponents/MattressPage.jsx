@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ProductImage, { BedCompatible, LayerInfo, ProductDescription, ProductDetail } from './ProductImage'
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Bestseller from './Bestseller';
 
 const MattressPage = () => {
   const param = useParams();
@@ -19,6 +20,7 @@ const MattressPage = () => {
       firm = "10";
 
     }
+    
     const level = parseInt(firm);
     console.log("defvgfv",level);
     if(level <= 4 ){
@@ -34,16 +36,33 @@ const MattressPage = () => {
       sethardnesimg("../../asset/9-10.webp")
     }
   }
+  function getProductsByCategory(categoryName) {
+    if (products.length >0){
+      return products.filter(product => product.category.includes(categoryName));
+    }
+    else{
+      return ([])
+    }
+  }
   const [productjson,setproductjson] = useState([]);
     function getProductsById(id) {
         return products.filter(product => product.id === id);
     }
 
+
+    const [mattresslist, setMattressList] = useState([]);
+    const [curtainlist, setCurtainList] = useState([]);
+    const [blackoutlist, setBlackoutList] = useState([]);
+    
+    
     useEffect(()=>{
       const p = getProductsById(id)
   
       setproductjson(p);
       mattresshardness(p[0]);
+      setMattressList(getProductsByCategory("Bestseller Mattress"));
+      setCurtainList(getProductsByCategory("Bestseller Curtains"));
+      setBlackoutList(getProductsByCategory("Blackout Curtains"));
         
     },[products])
   return (
@@ -66,6 +85,23 @@ const MattressPage = () => {
         <p className='text-center items-center m-auto text-3xl text-gray-600'>Mattress Hardness Meter :</p>
         <img src={hardnesimg} className='mt-5 md:mt-0'  alt="image for mattress firmness" />
       </div>
+
+      {mattresslist.length > 0 ? (
+      <Bestseller name="You May Also Like" list={mattresslist}/>
+    ) : (
+                <p>No products available</p>
+            )}
+
+    {curtainlist.length > 0 ? (
+
+      <div className='-my-4'><Bestseller name="Choose From Our Bestseller Curtains" list={curtainlist}/></div>
+    ) : (
+                <p>No Curtains available</p>
+            )}
+
+
+
+
    
     </div> ) }
   
