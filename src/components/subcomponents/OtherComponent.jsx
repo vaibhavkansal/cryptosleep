@@ -221,10 +221,9 @@ export const CurtainSizeModal = (props) => {
 		};
 	
 	const setsize = ()=>{
-			const finalsize = selectedCategory + " | "+ selectedVariant +' Ft OR '+ selectedVariant*12 + ' In';
-			const newMrp = parseInt(product.unitRateMRP) *  selectedVariant;
-			const newSP = parseInt(product.unitRateSellingP) *  selectedVariant;
-			console.log(finalsize,parseInt(product.unitRateMRP),newMrp,newSP)
+			const finalsize = selectedCategory + " | "+ selectedVariant +' Ft OR '+ (selectedVariant*12).toFixed(1) + ' In';
+			const newMrp = (parseInt(product.unitRateMRP) *  (selectedVariant*0.3048)) + 125;
+			const newSP = (parseInt(product.unitRateSellingP) *   (selectedVariant*0.3048))+125;
 			setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
 			closeModalref.current?.click();		
 		}
@@ -276,10 +275,11 @@ export const CurtainSizeModal = (props) => {
 
 					</div>
 					{selectedCategory==="Custom" && <>
+						
 
 						<div className="w-full">
 							<div className="flex flex-row-wrap gap-3">
-							<input type='number' ref={lengthref} onChange={()=>(setSelectedVariant(lengthref.current?.value/12))} placeholder="Height" className="w-1/2 p-2  text-center border-2 border-solid rounded-lg border-violet-700"/>
+							<input type='number' ref={lengthref} onChange={()=>(setSelectedVariant((lengthref.current?.value / 12).toFixed(2)))} placeholder="Height" className="w-1/2 p-2  text-center border-2 border-solid rounded-lg border-violet-700"/>
 							</div>
 
 						</div>

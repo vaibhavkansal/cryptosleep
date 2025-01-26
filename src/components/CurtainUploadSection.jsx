@@ -71,18 +71,18 @@ const CurtainUploadSection = () => {
     } else {
         
       let updatedFormData = { ...formData, [name]: value };
-            if (name === "mrp"){
+            if (name === "unitRateMRP"){
 
               var intd = parseInt(value);
-              intd = intd / 7;
+              intd = (intd*2.53)+125;
 
-              updatedFormData = { ...updatedFormData, ["unitRateMRP"]: intd };
+              updatedFormData = { ...updatedFormData, ["mrp"]: intd };
             }
-            else if (name === "sellingPrice"){
+            else if (name === "unitRateSellingP"){
 
               var intd = parseInt(value);
-              intd = intd / 7;
-              updatedFormData = { ...updatedFormData, ["unitRateSellingP"]: intd };
+              intd = (intd*2.53)+125;
+              updatedFormData = { ...updatedFormData, ["sellingPrice"]: intd };
             }
             setFormData(updatedFormData);
 
@@ -213,6 +213,15 @@ const CurtainUploadSection = () => {
         </div>
 
         <div className="mb-3">
+          <label className="form-label">MRP (Unit Rate/Meter)</label>
+          <input type="number"  className="form-control" name="unitRateMRP" value={formData.unitRateMRP} onChange={handleChange} />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Selling Price (Unit Rate/Meter)</label>
+          <input type="number"  className="form-control" name="unitRateSellingP" value={formData.unitRateSellingP} onChange={handleChange} />
+        </div>
+
+        <div className="mb-3">
           <label className="form-label">MRP (7 Ft)</label>
           <input type="number" className="form-control" name="mrp" value={formData.mrp} onChange={handleChange} required />
         </div>
@@ -240,15 +249,6 @@ const CurtainUploadSection = () => {
           </div>
         </div>
 
-       
-        <div className="mb-3">
-          <label className="form-label">Unit Rate Meter</label>
-          <input type="number"  className="form-control" name="unitRateMRP" value={formData.unitRateMRP} onChange={handleChange} />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Unit Rate Meter</label>
-          <input type="number"  className="form-control" name="unitRateSellingP" value={formData.unitRateSellingP} onChange={handleChange} />
-        </div>
 
         <div className="mb-3">
           <label className="form-label">Other Images</label>

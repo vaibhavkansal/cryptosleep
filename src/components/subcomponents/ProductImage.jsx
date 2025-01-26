@@ -372,7 +372,7 @@ export const ProductDetail = (props) => {
         </div>
 
         <div className="w-full">
-        <button onClick={addcart} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+          <button onClick={addcart} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
             Add To Cart
           </button>
         </div>
