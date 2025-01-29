@@ -1,4 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
+import { auth,signOutfun } from '../../utils/customfirebase';
+import { useSelector } from 'react-redux';
+import { collection, addDoc } from "firebase/firestore"; 
+
 
 export const Blankspace = () => {
   return (
@@ -97,8 +102,8 @@ export const MattressSizeModal = (props) => {
 
 	const setsize = ()=>{
 		const finalsize = selectedSize+" | "+ selectedVariant[0] +'" X '+ selectedVariant[1] + '" | '+ selectThickness+ '"';
-		const newMrp = parseInt(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness);
-		const newSP = parseInt(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness);
+		const newMrp = Math.round(parseInt(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness));
+		const newSP = Math.round(parseInt(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness));
 		console.log(finalsize,parseInt(product.unitRateMRP),newMrp,newSP)
 		setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
 		closeModalref.current?.click();		
@@ -222,8 +227,8 @@ export const CurtainSizeModal = (props) => {
 	
 	const setsize = ()=>{
 			const finalsize = selectedCategory + " | "+ selectedVariant +' Ft OR '+ (selectedVariant*12).toFixed(1) + ' In';
-			const newMrp = (parseInt(product.unitRateMRP) *  (selectedVariant*0.3048)) + 125;
-			const newSP = (parseInt(product.unitRateSellingP) *   (selectedVariant*0.3048))+125;
+			const newMrp = Math.round((parseInt(product.unitRateMRP) *  ((selectedVariant*0.3048)+0.4)) + 125);
+			const newSP = Math.round((parseInt(product.unitRateSellingP) *   ((selectedVariant*0.3048)+0.4))+125);
 			setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
 			closeModalref.current?.click();		
 		}
@@ -304,3 +309,106 @@ export const CurtainSizeModal = (props) => {
     </div>
 	);
 }
+
+
+export const AddressModal = (props) => {
+
+	const items = props.cartimtems;
+	const total = props.total;
+
+	var loggeduser = useSelector((state) => state.user);
+ 
+	const closeModalref = useRef(null);
+	const firstname = useRef(null);
+	const lastname = useRef(null);
+	const address = useRef(null);
+	const pincode = useRef(null);
+	const number = useRef(null);
+
+	function paynow(){
+		const firstNameValue = firstname.current?.value.trim();
+		const lastNameValue = lastname.current?.value.trim();
+		const addressValue = address.current?.value.trim();
+		const pincodeValue = pincode.current?.value.trim();
+		const numberValue = number.current?.value.trim();
+
+		if (!firstNameValue || !lastNameValue || !addressValue || !pincodeValue || !numberValue) {
+			alert("All fields must be filled!");
+			return;
+		}
+
+		if (!/^\d{10}$/.test(numberValue)) {
+			alert("Phone number must be exactly 10 digits!");
+			return;
+		}
+
+		const userdetails = {
+			firstName: firstNameValue,
+			lastName: lastNameValue,
+			address: addressValue,
+			pincode: pincodeValue,
+			number: numberValue,
+		}
+
+		const completedir = {"user":userdetails,"cart":items,"loggeduser":loggeduser};
+		console.log("completedir",completedir);
+		const docRef = addDoc(collection(db, "UserCart"), completedir);
+		console.log("Document written with ID: ", docRef.id);
+
+
+	}
+
+
+	return (
+	   <div className="modal fade " id="SizeModal" tabIndex="-1"  aria-labelledby="LoginModalLabel" aria-hidden="true">
+        <div id="loginmodaldialog " className="modal-dialog modal-xl modal-dialog-centered">
+        <div className="modal-content"  >
+            <div className="modal-header">
+            <h5 className="modal-title">Address</h5>
+                <button id="closemodal" ref={closeModalref} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body ">
+				<div className="grid grid-cols-2 gap-2">
+					<div class="relative z-0 w-full mb-5 group border-b-2 border-b-violet-800">
+						<input type="text" name="firstname" ref={firstname} id="firstname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+						<label for="firstname" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First Name</label>
+					</div>
+					<div class="relative z-0 w-full mb-5 group border-b-2 border-b-violet-800">
+						<input type="text" name="lastname" ref={lastname} id="lastname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+						<label for="lastname" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last Name</label>
+					</div>
+				</div>
+				<div className="grid gap-2">
+					
+					<div class="relative z-0 w-full mb-5 group border-b-2 border-b-violet-800">
+						<textarea type="text" ref={address} name="address" id="address" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+						<label for="address" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
+					</div>
+				</div>
+				<div className="grid grid-cols-2 gap-2">
+					<div class="relative z-0 w-full mb-5 group border-b-2 border-b-violet-800">
+						<input type="number" ref={pincode} name="pincode" id="pincode" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+						<label for="pincode" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Pincode</label>
+					</div>
+					<div class="relative z-0 w-full mb-5 group border-b-2 border-b-violet-800">
+						<input type="text" name="number" ref={number} id="number" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+						<label for="number" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Number</label>
+					</div>
+				</div>
+
+			</div>
+            <div className="modal-footer">
+                <div className="w-full flex">
+				<button onClick={paynow} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+						Pay Now
+					</button>
+                </div>
+
+            </div>
+
+            </div>
+            </div>
+    </div>
+	);
+}
+

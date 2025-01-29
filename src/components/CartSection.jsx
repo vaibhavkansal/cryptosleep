@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Blankspace } from './subcomponents/OtherComponent'
+import { AddressModal, Blankspace, CurtainSizeModal, MattressSizeModal } from './subcomponents/OtherComponent'
 import { useDispatch, useSelector } from 'react-redux';
 import { addtoCart, removeItem } from '../utils/cartSlice';
 
@@ -20,8 +20,8 @@ const CartSection = () => {
     var save =0;
     cart['items'].map((it)=>{
       
-        m= m+ it.mrp * it.cartQuantity;
-        t= t+ it.sellingPrice * it.cartQuantity;
+        m= m + (it.mrp * it.cartQuantity);
+        t= t + (it.sellingPrice * it.cartQuantity);
   
     })
     setmrptoal(m);
@@ -53,10 +53,10 @@ const CartSection = () => {
                           <h5 className="card-title">{cartitem.name}</h5>
                           <h5 className="text-base text-gray-600">{cartitem.about}</h5>
                           <div className="product-pricing">
-                              <span className="price">₹{cartitem.sellingPrice}</span>
-                              <span className="mrp">₹{cartitem.mrp}</span>
+                              <span className="price">₹{cartitem.sellingPrice * cartitem.cartQuantity}</span>
+                              <span className="mrp">₹{cartitem.mrp * cartitem.cartQuantity}</span>
                               <span className="discount text-nowrap">
-                                Save ₹{(cartitem.mrp - cartitem.sellingPrice).toFixed(2)}
+                                Save ₹{(cartitem.mrp * cartitem.cartQuantity - cartitem.sellingPrice * cartitem.cartQuantity)}
                               </span>
                               <span className="mx-3 text-gray-400">(Incl of all taxes)</span>
                             </div>    
@@ -117,7 +117,10 @@ const CartSection = () => {
                         <p className='text-xl text-gray-500 font-semibold'>Total</p>
                         <p className='text-xl font-semibold text-green-700'>{carttotal}</p>
                       </div>
-                      <button className='btn btn-success w-full'> Proceed To Checkout</button>
+
+                        <AddressModal cartimtems={items} total={carttotal}/>
+                      
+                      <button id="SizeModal" data-bs-toggle="modal" data-bs-target="#SizeModal" className=" text-center justify-between border-4 w-full h-12 rounded-lg bg-violet-800 text-white">PROCEED TO CHECKOUT</button>
 
                     </div>
                     
