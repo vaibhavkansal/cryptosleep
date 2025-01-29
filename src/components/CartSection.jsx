@@ -31,6 +31,22 @@ const CartSection = () => {
   },[cart])
 
 
+
+  useEffect(() => { 
+        // Dynamically load Razorpay script
+
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => {
+      console.log("Razorpay script loaded successfully!");
+    };
+    script.onerror = () => {
+      console.error("Failed to load Razorpay script");
+    };
+    document.body.appendChild(script);
+  }, []);
+
+
   return (
     <div>
           <Blankspace/>

@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-const db = getFirestore();
+export const db = getFirestore();
 export const auth = getAuth(app);
 export const signOutfun = ()=> {    
   signOut(auth).then(() => {

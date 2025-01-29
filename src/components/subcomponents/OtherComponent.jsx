@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
-import { auth,signOutfun } from '../../utils/customfirebase';
+import { getFunctions, httpsCallable } from "firebase/functions";
+import { auth,signOutfun,app,db } from '../../utils/customfirebase';
 import { useSelector } from 'react-redux';
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc,doc,setDoc } from "firebase/firestore"; 
+import { v4 as uuidv4 } from "uuid";
 
 
 export const Blankspace = () => {
@@ -324,6 +326,57 @@ export const AddressModal = (props) => {
 	const address = useRef(null);
 	const pincode = useRef(null);
 	const number = useRef(null);
+	const functions = getFunctions(app);
+
+	const callFunction = async (completedir,total) => {
+		const uniqueId = uuidv4();
+		const docRef = doc(db, "UserCart", uniqueId);
+		await setDoc(docRef, completedir);
+		const createOrder = httpsCallable(functions, "createOrder");
+		try {
+		  const result = await createOrder({ amount : String(total*100)});
+		  console.log(result);
+		  console.log(result.data.response.responseamount);
+		  console.log(result.data.response.currency);
+		  setDoc(docRef, {
+			...completedir, // Keep existing data
+			functionResponse: result.data, // Add function response
+			timestamp: new Date(),
+		  });
+
+
+
+		  if (window.Razorpay) {
+			const options = {
+			  key: "rzp_live_J7gn7nE5T7goDG", // Replace with your Razorpay Key ID
+			  amount: String(result.data.response.amount), // Amount in smallest currency unit (e.g., 50000 paisa = ₹500)
+			  currency: result.data.response.currency,
+			  name: "Cryptosleep Store",
+			  description: "Payment",
+			  order_id: result.data.response.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+			  handler: function (response) {
+				console.log("Payment Successful:", response);
+			  },
+			  prefill:completedir,
+			  notes: {
+				address: "Address for order delivery",
+			  },
+			  theme: {
+				color: "#5b21b6", // Customize button color
+			  },
+			};
+			console.log(options);
+	  
+			const rzp1 = new window.Razorpay(options);
+			rzp1.open();
+		  } else {
+			console.error("Razorpay script is not loaded properly.");
+		  }
+			}
+		catch (error) {
+		  console.error("Error calling function:", error);
+		}
+	  };
 
 	function paynow(){
 		const firstNameValue = firstname.current?.value.trim();
@@ -351,10 +404,7 @@ export const AddressModal = (props) => {
 		}
 
 		const completedir = {"user":userdetails,"cart":items,"loggeduser":loggeduser};
-		console.log("completedir",completedir);
-		const docRef = addDoc(collection(db, "UserCart"), completedir);
-		console.log("Document written with ID: ", docRef.id);
-
+		callFunction(completedir,total);
 
 	}
 
