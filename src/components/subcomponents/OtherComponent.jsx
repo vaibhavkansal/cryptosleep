@@ -104,8 +104,8 @@ export const MattressSizeModal = (props) => {
 
 	const setsize = ()=>{
 		const finalsize = selectedSize+" | "+ selectedVariant[0] +'" X '+ selectedVariant[1] + '" | '+ selectThickness+ '"';
-		const newMrp = Math.round(parseInt(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness));
-		const newSP = Math.round(parseInt(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness/parseInt(product.thickness));
+		const newMrp = Math.round(parseInt(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
+		const newSP = Math.round(parseInt(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
 		console.log(finalsize,parseInt(product.unitRateMRP),newMrp,newSP)
 		setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
 		closeModalref.current?.click();		

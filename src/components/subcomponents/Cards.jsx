@@ -15,7 +15,7 @@ const Cards = (props  ) => {
 
   return (
     <div className=''>
-      <Link to={`${maincategory}/${id}`} className='no-underline'>
+      <Link to={`/${maincategory}/${id}`} className='no-underline'>
       <div className="card group overflow-hidden max-w-72 mx-auto relative bg-white">
       <div className="overflow-hidden">
         <img 

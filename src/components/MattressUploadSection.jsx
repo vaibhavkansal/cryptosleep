@@ -73,14 +73,18 @@ const MattressUploadSection = () => {
             if (name === "mrp"){
 
               var intd = parseInt(value);
-              intd = intd / 2592;
+              var thick = parseInt(formData["thickness"]);
+
+              intd = intd / (2592*thick);
 
               updatedFormData = { ...updatedFormData, ["unitRateMRP"]: intd };
             }
             else if (name === "sellingPrice"){
 
               var intd = parseInt(value);
-              intd = intd / 2592;
+              var thick = parseInt(formData["thickness"]);
+
+              intd = intd / (2592*thick);
               updatedFormData = { ...updatedFormData, ["unitRateSellingP"]: intd };
 
             }

@@ -10,6 +10,10 @@ const MattressPage = () => {
   const maincategory = param["maincategory"];
   const products = useSelector((state) => state.products);
   const [hardnesimg,sethardnesimg] = useState("");
+
+
+
+
   function mattresshardness(l){
     var firm = "10";
     try{
