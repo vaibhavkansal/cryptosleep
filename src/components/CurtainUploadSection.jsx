@@ -73,14 +73,14 @@ const CurtainUploadSection = () => {
       let updatedFormData = { ...formData, [name]: value };
             if (name === "unitRateMRP"){
 
-              var intd = parseInt(value);
+              var intd = parseFloat(value);
               intd = Math.round((intd*2.53)+125);
 
               updatedFormData = { ...updatedFormData, ["mrp"]: intd };
             }
             else if (name === "unitRateSellingP"){
 
-              var intd = parseInt(value);
+              var intd = parseFloat(value);
               intd = Math.round((intd*2.53)+125);
               updatedFormData = { ...updatedFormData, ["sellingPrice"]: intd };
             }

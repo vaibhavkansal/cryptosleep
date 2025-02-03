@@ -18,7 +18,7 @@ const Bestseller = (props) => {
         options={{
           type: 'loop',
           perPage: 4, // Show 6 slides on large screens
-          autoplay: false, // Disable autoplay on large screens
+          autoplay: true, // Disable autoplay on large screens
           breakpoints: {
             992: { // For screens <= 768px
               perPage: 2, // Show 3 slides
@@ -31,7 +31,7 @@ const Bestseller = (props) => {
           },
           gap: '1rem', // Add space between slides
           pagination: false, // Hide pagination
-          arrows: false, // Hide arrows
+          arrows: true, // Hide arrows
         }}
         aria-label="Why Choose Us"
       >

@@ -17,7 +17,12 @@ const ProductImage = ({ product }) => {
     if (mainRef.current && thumbnailRef.current) {
       const mainSplide = mainRef.current.splide;
       const thumbnailSplide = thumbnailRef.current.splide;
-      setallimages([image, layerImage, ...otherImages]);
+      if (layerImage === ""){
+        setallimages([image, ...otherImages]);
+      }
+      else{
+        setallimages([image, layerImage, ...otherImages]);
+      }
 
       if (mainSplide && thumbnailSplide) {
         mainSplide.sync(thumbnailSplide);
