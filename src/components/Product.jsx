@@ -22,7 +22,9 @@ const Product = () => {
   return (
     <>
       <Blankspace/>
-      {categoryPage(maincategory)}
+      <div key={id}>
+        {categoryPage(maincategory)}
+      </div>
 
     </>
   )

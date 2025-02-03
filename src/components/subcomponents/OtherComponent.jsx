@@ -28,28 +28,28 @@ export const Whychosecurtain = () =>{
 				<div className="card text-center">
 					<img style={{"margin":"-45px"}} className="w-28 self-center" src="https://www.curtainwala.com/assets/images/icons/Select-fabric-icon.png"/>
 						<div className="mt-16 text-2xl font-medium">STEP 1</div>
-						<div className="my-4 text-xl font-extrabold my-5">Select the Fabric</div>
+						<div className="text-xl font-extrabold my-5">Select the Fabric</div>
 				</div>
 			</div>
       <div className="col-md-3 mb-5">
 				<div className="card text-center">
 					<img style={{"margin":"-45px"}} className="w-28 self-center" src="https://www.curtainwala.com/assets/images/icons/Give-measurement-icon.png"/>
 						<div className="mt-16 text-2xl font-medium">STEP 2</div>
-						<div className="my-4 text-xl font-extrabold my-5">Give the Measurements</div>
+						<div className="text-xl font-extrabold my-5">Give the Measurements</div>
 				</div>
 			</div>
       <div className="col-md-3 mb-5">
 				<div className="card text-center">
 					<img style={{"margin":"-45px"}} className="w-28 self-center" src="https://www.curtainwala.com/assets/images/icons/Get-estimate-icon.png"/>
 						<div className="mt-16 text-2xl font-medium">STEP 3</div>
-						<div className="my-4 text-xl font-extrabold my-5">Get Cost Estimation</div>
+						<div className="text-xl font-extrabold my-5">Get Cost Estimation</div>
 				</div>
 			</div>
       <div className="col-md-3 mb-5">
 				<div className="card text-center">
 					<img style={{"margin":"-45px"}} className="w-28 self-center" src="https://www.curtainwala.com/assets/images/icons/Get-installed-icon.png"/>
 						<div className="mt-16 text-2xl font-medium">STEP 4</div>
-						<div className="my-4 text-xl font-extrabold my-5">Get Installed</div>
+						<div className="text-xl font-extrabold my-5">Get Installed</div>
 				</div>
 			</div>			
 		</div>
@@ -104,9 +104,9 @@ export const MattressSizeModal = (props) => {
 
 	const setsize = ()=>{
 		const finalsize = selectedSize+" | "+ selectedVariant[0] +'" X '+ selectedVariant[1] + '" | '+ selectThickness+ '"';
-		const newMrp = Math.round(parseInt(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
-		const newSP = Math.round(parseInt(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
-		console.log(finalsize,parseInt(product.unitRateMRP),newMrp,newSP)
+		const newMrp = Math.round(parseFloat(product.unitRateMRP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
+		const newSP = Math.round(parseFloat(product.unitRateSellingP) *  selectedVariant[0]*selectedVariant[1]*selectThickness);
+		console.log("size" + finalsize,"unit mrp",parseFloat(product.unitRateMRP),"varient",selectedVariant,"Thickness",selectThickness,"Mrp",newMrp,"sellingPrice",newSP)
 		setproduct({...product,"OrderSize":finalsize,"mrp":newMrp,"sellingPrice":newSP});
 		closeModalref.current?.click();		
 	}
@@ -190,7 +190,7 @@ export const MattressSizeModal = (props) => {
             </div>
             <div className="modal-footer">
                 <div className="w-full flex">
-				<button onClick={setsize} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+				<button onClick={setsize} className=" w-full mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
 						Confirm Variant
 					</button>
                 </div>
@@ -300,7 +300,7 @@ export const CurtainSizeModal = (props) => {
             </div>
             <div className="modal-footer">
                 <div className="w-full flex">
-				<button onClick={setsize} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+				<button onClick={setsize} className=" w-full mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
 						Confirm Variant
 					</button>
                 </div>
@@ -449,7 +449,7 @@ export const AddressModal = (props) => {
 			</div>
             <div className="modal-footer">
                 <div className="w-full flex">
-				<button onClick={paynow} className=" w-full rounded-lg mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+				<button onClick={paynow} className=" w-full mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
 						Pay Now
 					</button>
                 </div>

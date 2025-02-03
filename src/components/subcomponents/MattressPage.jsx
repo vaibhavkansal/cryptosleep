@@ -102,11 +102,7 @@ const MattressPage = () => {
     ) : (
                 <p>No Curtains available</p>
             )}
-
-
-
-
-   
+  
     </div> ) }
   
     </>
@@ -115,35 +111,3 @@ const MattressPage = () => {
 
 export default MattressPage
 
-// {
-//   "id": "SKY-df2bb41c",
-//   "baseLayer": "Hr Foam",
-//   "idealFor": "Adults ",
-//   "review": "100",
-//   "mattressFeel": "medium",
-//   "maincategory": "mattress",
-//   "image": "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FmainImage.jpg?alt=media&token=3f4dbfd0-8c2a-46b2-a406-b4c40dd0f302",
-//   "warranty": "7",
-//   "clothType": "Jaquard with 22MM Quilting",
-//   "name": "Dual Comfort Mattress",
-//   "detailDesc": "Discover the art of indulgent slumber with our Dual Comfort Mattress, a harmonious symphony of Medium Soft and Medium Firm on opposing sides.\nImmerse yourself in the blissful embrace of a cloud-like Medium Soft sensation, while on the flip side, revel in the embrace of a Medium Firm support, seamlessly accommodating your diverse sleep needs. \nThis duality of comfort ensures every night is a masterpiece of restful serenity.",
-//   "about": "Medium Soft & Medium Firm, Yours to Embrace",
-//   "topLayer": "Memory Foam",
-//   "otherImages": [
-//       "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FotherImages%2FBlue-2.jpg?alt=media&token=18d94d19-a9a8-468f-bf0c-7191621e1be6",
-//       "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FotherImages%2Fcropped-13.jpg?alt=media&token=bda6703d-a551-46e7-83ca-e68d8f596375",
-//       "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FotherImages%2F1.png?alt=media&token=775ff21e-7948-4307-aa4c-fa25db0c248a",
-//       "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FotherImages%2F2.png?alt=media&token=437828eb-193c-46ca-a5f7-547ea5440a1f"
-//   ],
-//   "middleLayer": "Comfort Soft Foam",
-//   "unitRate": "302",
-//   "mattressFirmness": 5,
-//   "sellingPrice": "5607",
-//   "category": [
-//       "Mattress",
-//       "Bestseller Mattress",
-//       "Medium Mattress"
-//   ],
-//   "layerImage": "https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/products%2FSKY-df2bb41c%2FlayerImage.jpg?alt=media&token=9fe9e165-47b3-4033-b255-bf271b07acfb",
-//   "mrp": "7890"
-// }

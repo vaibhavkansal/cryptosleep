@@ -458,7 +458,6 @@ export const BedCompatible = () =>{
 
 export const LayerInfo = ({product}) =>{
 
-  const layerDetail = {"Pu Foam":"Cryptosleep P.U. foam resilience lends itself to better flexibility, thus offering pressure point comfort. It has a medium-firm feel and gives optimal body support and a comfortable bounce.","Hr Foam":"HR foam is renowned for its superior bounce and elasticity. It adapts quickly to body movements, providing optimal support and comfort. This type of foam is highly durable, making it a preferred choice for premium mattresses and seating.","Comfort Soft Foam":"A softer, snug, superior PU foam that has undergone rigorous testing. Resilience and softness blended together for the right feel.","Memory Foam":"Cryptosleep Memory foam is celebrated for its unique ability to contour to the body, relieving pressure points and enhancing comfort. It retains shape after use, ensuring consistent support. Ideal for those seeking a customized sleep experience, memory foam is a hallmark of luxurious mattresses.","Bonded Foam":"Rebonded foam is made by compressing and bonding shredded pieces of foam under high pressure. It is known for its exceptional density and firmness, offering robust support and durability. Commonly used in orthopedic mattresses and seating solutions, rebonded foam provides excellent support for the back and body."}
 
   return(
     <>
@@ -471,15 +470,15 @@ export const LayerInfo = ({product}) =>{
       <div className="">
       <div className="border-b-4 ">
         <div className=" px-4 pt-4 text-xl text-gray-700 font-semibold">Top Layer : {product.topLayer}</div>
-        <p className="px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{layerDetail[product.topLayer]}</p>
+        <p className="px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{product.topLayerDetail}</p>
         </div>
       </div>
-
+    {console.log(product)}
     {product.middleLayer !== "NO" &&
         <div className="">
         <div className="border-b-4   ">
           <div className=" px-4 pt-4 text-xl text-gray-600 font-semibold">Middle Layer : {product.middleLayer}</div>
-          <div className=" px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{layerDetail[product.middleLayer]}</div>
+          <div className=" px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{product.middleLayerDetail}</div>
         </div>
       </div>
     }
@@ -487,7 +486,7 @@ export const LayerInfo = ({product}) =>{
     <div className="">
       <div className="border-b-4  ">
         <div className="px-4 pt-4 text-xl text-gray-600 font-semibold">Base Layer : {product.baseLayer}</div>
-        <div className="px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{layerDetail[product.baseLayer]}</div>
+        <div className="px-4 pt-2 pb-4 text-lg text-gray-500 font-semibold">{product.baseLayerDetail}</div>
       </div>
     </div>
 

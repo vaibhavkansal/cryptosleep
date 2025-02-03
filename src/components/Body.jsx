@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom";
 import { auth,fetchdata } from "../utils/customfirebase";
 import { useEffect } from "react";
 import {onAuthStateChanged } from "firebase/auth";
@@ -123,6 +123,10 @@ const Body = () => {
                 {
                     path:"/:maincategory/:pid",
                     element:<Product/>
+                },
+                {
+                    path:"*",
+                    element:<Navigate to="/"/>
                 }
             ]
 
