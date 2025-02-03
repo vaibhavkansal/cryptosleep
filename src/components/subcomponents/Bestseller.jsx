@@ -1,51 +1,76 @@
-import React from 'react'
-import Cards from './Cards'
+import React, { useRef } from 'react';
+import Cards from './Cards';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/css';
 
 const Bestseller = (props) => {
-
   const headername = props.name;
-  const  list= props.list;
-  
+  const list = props.list;
+
+  // References for Splide instance
+  const splideRef = useRef(null);
+
   return (
-    <div className='bg-gray-100'>
-        <div className="container pb-5 mb-3">
-            <p className='text-4xl px-3 py-6 text-gray-600'>{headername}</p>
-            
+    <div className="bg-gray-100 relative">
+      <div className="container pb-5 mb-3">
+        <p className="text-4xl px-3 py-6 text-gray-600">{headername}</p>
 
-            <Splide
-        options={{
-          type: 'loop',
-          perPage: 4, // Show 6 slides on large screens
-          autoplay: true, // Disable autoplay on large screens
-          breakpoints: {
-            992: { // For screens <= 768px
-              perPage: 2, // Show 3 slides
-              autoplay: true, // Enable autoplay on small screens
+        <Splide
+          ref={splideRef}
+          options={{
+            type: 'loop',
+            perPage: 4,
+            autoplay: true,
+            breakpoints: {
+              992: { perPage: 2, autoplay: true },
+              576: { perPage: 1, autoplay: true },
             },
-            576:{
-              perPage: 1, // Show 3 slides
-              autoplay: true, // Enable autoplay on small screens
-            }
-          },
-          gap: '1rem', // Add space between slides
-          pagination: false, // Hide pagination
-          arrows: true, // Hide arrows
-        }}
-        aria-label="Why Choose Us"
-      >
-        {/* for loop lagakar yaha process processkardo */}
-        {list.map((info,index) =>(
-          <SplideSlide key={index}><Cards info = {info}/></SplideSlide>
-        ))}
-        
+            gap: '1rem',
+            pagination: false,
+            arrows: false, // Disable default arrows
+          }}
+          aria-label="Bestsellers"
+        >
+          {list.map((info, index) => (
+            <SplideSlide key={index}>
+              <Cards info={info} />
+            </SplideSlide>
+          ))}
         </Splide>
-        
-        </div>
 
+        {/* Custom Navigation Arrows */}
+        <button
+          className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-200 transition"
+          onClick={() => splideRef.current?.splide.go('<')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2 hover:bg-gray-200 transition"
+          onClick={() => splideRef.current?.splide.go('>')}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bestseller
+export default Bestseller;
