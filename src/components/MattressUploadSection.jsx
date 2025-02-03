@@ -27,9 +27,12 @@ const MattressUploadSection = () => {
     idealFor: [],
     mattressFirmness: 5,
     detailDesc: "",
-    baseLayer:"",
-    middleLayer:"",
-    topLayer:"",
+    baseLayer:"NO",
+    baseLayerDetail:"",
+    middleLayer:"NO",
+    middleLayerDetail:"",
+    topLayer:"NO",
+    topLayerDetail:"",
     layerImage:null,
     clothType: "",
   });
@@ -37,8 +40,13 @@ const MattressUploadSection = () => {
   const db = getFirestore(app);
   const storage = getStorage(app);
   const navigate = useNavigate();
+  const layerDetail = {"Pu Foam":"Cryptosleep P.U. foam resilience lends itself to better flexibility, thus offering pressure point comfort. It has a medium-firm feel and gives optimal body support and a comfortable bounce.","Hr Foam":"HR foam is renowned for its superior bounce and elasticity. It adapts quickly to body movements, providing optimal support and comfort. This type of foam is highly durable, making it a preferred choice for premium mattresses and seating.","Comfort Soft Foam":"A softer, snug, superior PU foam that has undergone rigorous testing. Resilience and softness blended together for the right feel.","Memory Foam":"Cryptosleep Memory foam is celebrated for its unique ability to contour to the body, relieving pressure points and enhancing comfort. It retains shape after use, ensuring consistent support. Ideal for those seeking a customized sleep experience, memory foam is a hallmark of luxurious mattresses.","Bonded Foam":"Rebonded foam is made by compressing and bonding shredded pieces of foam under high pressure. It is known for its exceptional density and firmness, offering robust support and durability. Commonly used in orthopedic mattresses and seating solutions, rebonded foam provides excellent support for the back and body."}
 
+  
+  
   // Handle input change
+
+
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
@@ -88,10 +96,43 @@ const MattressUploadSection = () => {
               updatedFormData = { ...updatedFormData, ["unitRateSellingP"]: intd };
 
             }
+            
+            // else if (name === "topLayer"){
+            //   updatedFormData = { ...updatedFormData, ["topLayerDetail"]: layerDetail[value] };
+            
+            // }
+            // else if (name === "middleLayer"){
+            //   updatedFormData = { ...updatedFormData, ["middleLayerDetail"]: layerDetail[value] };
+            
+            // }
+            // else if (name === "baseLayer"){
+            //   updatedFormData = { ...updatedFormData, ["baseLayerDetail"]: layerDetail[value] };
+            
+            // }
 
             setFormData(updatedFormData);
         
     }
+  };
+
+  const newHandleChange = (e) => {
+    const { name, value, type, files } = e.target;
+    let updatedFormData = { ...formData, [name]: value };
+    if (name === "topLayer"){
+      updatedFormData = { ...updatedFormData, ["topLayerDetail"]: layerDetail[value] };
+    
+    }
+    else if (name === "middleLayer"){
+      updatedFormData = { ...updatedFormData, ["middleLayerDetail"]: layerDetail[value] };
+    
+    }
+    else if (name === "baseLayer"){
+      updatedFormData = { ...updatedFormData, ["baseLayerDetail"]: layerDetail[value] };
+    
+    }
+
+    setFormData(updatedFormData);
+
   };
 
   // Handle form submission
@@ -154,9 +195,12 @@ const MattressUploadSection = () => {
         idealFor: [],
         mattressFirmness: 5,
         detailDesc: "",
-        baseLayer:"",
-        middleLayer:"",
-        topLayer:"",
+        baseLayer:"NO",
+        baseLayerDetail:"",
+        middleLayer:"NO",
+        middleLayerDetail:"",
+        topLayer:"NO",
+        topLayerDetail:"",
         layerImage:null,
         clothType: "",
       });
@@ -185,27 +229,6 @@ const MattressUploadSection = () => {
           <input type="file" className="form-control" name="image" onChange={handleChange} />
         </div>
 
-
-        {/* <div className="mb-3">  
-        <label className="form-label">Main Category</label>
-          <div>
-            {['mattress', 'curtain', 'furniture'].map((cat) => (
-              <div className="form-check" key={cat}>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="maincategory" 
-                  value={cat} 
-                  id={cat} 
-                  onChange={handleChange} 
-                />
-                <label className="form-check-label" htmlFor={cat}>{cat}</label>
-              </div>
-            ))}
-          </div>
-        </div> */}
-
-      
 
         <div className="mb-3">
           <label className="form-label">Title</label>
@@ -306,7 +329,7 @@ const MattressUploadSection = () => {
 
           <div className="basis-1/3">
               <label className="form-label">Base Layer</label>
-              <select id="baseLayer" name="baseLayer" value={formData.baseLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full">
+              <select id="optionbaseLayer" name="baseLayer" onChange={newHandleChange} className="border rounded px-2 py-1 w-full">
                   <option>No</option>
                   <option>Pu Foam</option>
                   <option>Hr Foam</option>
@@ -314,21 +337,28 @@ const MattressUploadSection = () => {
                   <option>Memory Foam</option>
                   <option>Bonded Foam</option>
                 </select>
+
+                <input id="baseLayer" name="baseLayer" value={formData.baseLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full"/>
+              <textarea rows={5} className="w-full border border-solid py-2" id="baseLayerDetail" name="baseLayerDetail" value={formData.baseLayerDetail} onChange={handleChange}/>
             </div>
           <div className="basis-1/3">
               <label className="form-label">middle Layer</label>
-              <select id="middleLayer" name="middleLayer" value={formData.middleLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full">
+              <select id="optionmiddleLayer" name="middleLayer"  onChange={newHandleChange} className="border rounded px-2 py-1 w-full">
                   <option>No</option>
                   <option>Pu Foam</option>
                   <option>Hr Foam</option>
                   <option>Comfort Soft Foam</option>
                   <option>Memory Foam</option>
                   <option>Bonded Foam</option>
-            </select>
+              </select>
+
+              <input id="middleLayer" name="middleLayer" value={formData.middleLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full"/>
+              <textarea rows={5} className="w-full border border-solid py-2"  id="middleLayerDetail" name="middleLayerDetail" value={formData.middleLayerDetail} onChange={handleChange}/>
+
           </div>
           <div className="basis-1/3">
               <label className="form-label">Top Layer</label>
-              <select id="topLayer" name="topLayer" value={formData.topLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full">
+              <select id="optiontopLayer" name="topLayer"  onChange={newHandleChange} className="border rounded px-2 py-1 w-full">
                   <option>No</option>
                   <option>Pu Foam</option>
                   <option>Hr Foam</option>
@@ -336,6 +366,10 @@ const MattressUploadSection = () => {
                   <option>Memory Foam</option>
                   <option>Bonded Foam</option>
                 </select>
+
+                <input id="topLayer" name="topLayer" value={formData.topLayer} onChange={handleChange} className="border rounded px-2 py-1 w-full"/>
+                <textarea rows={5} className="w-full border border-solid py-2"  id="topLayerDetail" name="topLayerDetail" value={formData.topLayerDetail} onChange={handleChange}/>
+
           </div>
           
         </div>
