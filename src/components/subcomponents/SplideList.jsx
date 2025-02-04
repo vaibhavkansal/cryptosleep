@@ -1,11 +1,13 @@
 import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/css';
+import { Link } from 'react-router-dom';
 
 
 
 export const MainImageSplide = (props) => {
     const imgPath = props.imgPath;
+    const linkpath = props.linkpath;
   return (
     <div>
         <Splide
@@ -18,7 +20,11 @@ export const MainImageSplide = (props) => {
       aria-label="BannerImage"
     >  
     {imgPath.map((path,index)=>(
-      <SplideSlide key={index}><img src={path} className="w-full h-full object-cover"/></SplideSlide>
+      <SplideSlide key={index}>     
+       <Link to={`/${linkpath[index]}`}>
+          <img src={path} className="w-full h-full object-cover"/>
+        </Link>
+</SplideSlide>
 
     ))}      
     </Splide>

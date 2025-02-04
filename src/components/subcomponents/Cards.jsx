@@ -35,7 +35,7 @@ const Cards = (props  ) => {
                     <span className="price">₹{sellingPrice}</span>
                     <span className="mrp">₹{mrp}</span>
                     <span className="discount text-nowrap">
-                        Save ₹{(mrp - sellingPrice).toFixed(2)}
+                        Save ₹{(mrp - sellingPrice).toFixed(0)}
                     </span>
                 </div>
               </div>

@@ -240,7 +240,7 @@ const CurtainUploadSection = () => {
           <label className="form-label">Category</label>
           <div>
           {/*  */}
-            {['Bestseller Curtains','Blackout Curtains','Designer Curtains','Jacquard Curtains'].map((cat) => (
+            {['Bestseller Curtains','Blackout Curtains','Designer Curtains','Jacquard Curtains','Sheer Curtains'].map((cat) => (
               <div className="form-check" key={cat}>
                 <input className="form-check-input" type="checkbox" name="category" value={cat} id={cat} onChange={handleChange} />
                 <label className="form-check-label" htmlFor={cat}>{cat}</label>
@@ -255,16 +255,7 @@ const CurtainUploadSection = () => {
           <input type="file" className="form-control" name="otherImages" multiple onChange={handleChange} />
         </div>
 
-        {/* <div className="mb-3">
-          <label className="form-label">Mattress Feel</label>
-          <select className="form-select" name="mattressFeel" value={formData.mattressFeel} onChange={handleChange} required>
-            <option value="">Choose...</option>
-            <option value="hard">Hard</option>
-            <option value="medium">Medium</option>
-            <option value="soft">Soft</option>
-          </select>
-        </div> */}
-
+  
         <div className="mb-3">
           <label className="form-label">Warranty</label>
           <input type="text" className="form-control" name="warranty" value={formData.warranty} onChange={handleChange} />
@@ -275,10 +266,6 @@ const CurtainUploadSection = () => {
           <input type="text" className="form-control" name="idealFor" value={formData.idealFor} onChange={handleChange} placeholder="Separate values with commas" />
         </div>
 
-        {/* <div className="mb-3">
-          <label className="form-label">Mattress Firmness (1-10)</label>
-          <input type="range" className="form-range" name="mattressFirmness" min="1" max="10" value={formData.mattressFirmness} onChange={handleChange} />
-        </div> */}
 
         <div className="mb-3">
           <label className="form-label">Detailed Description</label>

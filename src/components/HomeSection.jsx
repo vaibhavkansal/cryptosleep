@@ -20,7 +20,7 @@ const HomeSection = () => {
   }
 
   const imgPath = ["../asset/banner2.png","../asset/banner4.png","../asset/banner3.png","../asset/banner5.png"] // banner image paths
-  
+  const linkpath=['mattress','curtain','curtain','mattress'];
   const [mattresslist, setMattressList] = useState([]);
   const [curtainlist, setCurtainList] = useState([]);
   const [blackoutlist, setBlackoutList] = useState([]);
@@ -40,7 +40,7 @@ const HomeSection = () => {
       <Blankspace/>
 
       <div className=''>
-      <MainImageSplide imgPath={imgPath} className=""/>
+      <MainImageSplide imgPath={imgPath} linkpath={linkpath} className=""/>
       </div>
 
       <h2 className='text-2xl m-7  md:text-4xl text-center leading-relaxed md:m-10 text-gray-600 font-serif md:leading-loose'>Redefining Comfort, Style,<br/> and Luxury for Your Home.</h2>

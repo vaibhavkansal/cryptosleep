@@ -751,7 +751,7 @@ export const CurtainDetail = (props) => {
           <button className="px-2 text-violet-800" onClick={checkPincode}>CHECK</button>
           </div>
           </div>
-          <div className="basis-8/12 sm:basis-1/2 sm:mt-4">
+          <div className="basis-11/12 sm:basis-1/2 sm:mt-4">
           <div className="font-bold">Choose Size</div>
           <CurtainSizeModal product={product} setproduct={setproduct}/>
 

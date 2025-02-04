@@ -27,7 +27,7 @@ const CurtainPage = () => {
 
     function DescForBlackout(){
       return(
-        <div className="row m-5 py-3">
+        <div className="row m-2 m-md-5 py-3">
                 <div className="col-12 col-md-5 flex align-middle items-center ">
                     <div>
                     <h2 className='text-2xl md:text-4xl font-extrabold text-gray-800'>Noise Reducing Blackout Curtains</h2>
@@ -38,8 +38,8 @@ const CurtainPage = () => {
                 </div>
                 <div className="col-12 col-md-7 ">
                 <div className="row flex justify-center">
-                    <img className="img col-5" alt="Blackout Noise reducing curtains | Cryptosleep" src="../asset/thermal1.webp"/>
-                    <img className="img col-5" alt="Blackout Noise reducing curtains | Cryptosleep" src="../asset/thermal2.webp"/>
+                    <img className="img col-6" alt="Blackout Noise reducing curtains | Cryptosleep" src="../asset/thermal1.webp"/>
+                    <img className="img col-6" alt="Blackout Noise reducing curtains | Cryptosleep" src="../asset/thermal2.webp"/>
                 </div>
 
                     
@@ -47,7 +47,7 @@ const CurtainPage = () => {
                 </div>
 
 
-                <div className="col-12 col-md-5 flex align-middle items-center my-md-5 ">
+                <div className="col-12 col-md-5 flex align-middle items-center my-5 ">
                 <img className="img rounded-2xl" alt="Blackout curtains | Cryptosleep" src="https://firebasestorage.googleapis.com/v0/b/cryptosleep-furniture.firebasestorage.app/o/website%2F4.jpg?alt=media&token=6e1045a5-1899-44cd-aae3-55f750c34846"/>
                 </div>
 

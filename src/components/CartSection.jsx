@@ -51,7 +51,7 @@ const CartSection = () => {
     <div>
           <Blankspace/>
           <div className='bg-gray-50'>
-            <div className="container-lg p-5" style={{"min-height":"70vh"}}>
+            <div className="container- p-1 p-md-5" style={{"min-height":"70vh"}}>
               <div className="grid grid-cols-3 gap-4">
 
                 <div className="col-span-3 md:col-span-2"> 

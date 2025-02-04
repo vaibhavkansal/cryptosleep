@@ -326,6 +326,8 @@ export const AddressModal = (props) => {
 	const address = useRef(null);
 	const pincode = useRef(null);
 	const number = useRef(null);
+	const paybutton = useRef(null);
+	const [isLoading, setIsLoading] = useState(false);
 	const functions = getFunctions(app);
 
 	const callFunction = async (completedir,total) => {
@@ -343,6 +345,7 @@ export const AddressModal = (props) => {
 			functionResponse: result.data, // Add function response
 			timestamp: new Date(),
 		  });
+		  setIsLoading(false);
 
 
 
@@ -379,19 +382,22 @@ export const AddressModal = (props) => {
 	  };
 
 	function paynow(){
+		setIsLoading(true);
 		const firstNameValue = firstname.current?.value.trim();
 		const lastNameValue = lastname.current?.value.trim();
 		const addressValue = address.current?.value.trim();
 		const pincodeValue = pincode.current?.value.trim();
 		const numberValue = number.current?.value.trim();
 
-		if (!firstNameValue || !lastNameValue || !addressValue || !pincodeValue || !numberValue) {
+		if (!firstNameValue || !addressValue || !pincodeValue || !numberValue) {
 			alert("All fields must be filled!");
+			setIsLoading(false);
 			return;
 		}
 
 		if (!/^\d{10}$/.test(numberValue)) {
 			alert("Phone number must be exactly 10 digits!");
+			setIsLoading(false);
 			return;
 		}
 
@@ -449,8 +455,9 @@ export const AddressModal = (props) => {
 			</div>
             <div className="modal-footer">
                 <div className="w-full flex">
-				<button onClick={paynow} className=" w-full mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
-						Pay Now
+				<button onClick={paynow} ref={paybutton} disabled={isLoading} className=" w-full mt-3 bg-violet-700 text-white text-2xl py-2 px-4 rounded-lg hover:bg-violet-700 focus:bg-violet-900 focus:outline-none transition-all duration-200">
+						{isLoading ? 'Loading...' : 'Pay Now'}
+
 					</button>
                 </div>
 
