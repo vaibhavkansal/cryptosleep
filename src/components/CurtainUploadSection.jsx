@@ -74,14 +74,14 @@ const CurtainUploadSection = () => {
             if (name === "unitRateMRP"){
 
               var intd = parseFloat(value);
-              intd = Math.round((intd*2.53)+125);
+              intd = Math.round((intd*1.92)+125);
 
               updatedFormData = { ...updatedFormData, ["mrp"]: intd };
             }
             else if (name === "unitRateSellingP"){
 
               var intd = parseFloat(value);
-              intd = Math.round((intd*2.53)+125);
+              intd = Math.round((intd*1.92)+125);
               updatedFormData = { ...updatedFormData, ["sellingPrice"]: intd };
             }
             setFormData(updatedFormData);
@@ -222,12 +222,12 @@ const CurtainUploadSection = () => {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">MRP (7 Ft)</label>
+          <label className="form-label">MRP (5 Ft)</label>
           <input type="number" className="form-control" name="mrp" value={formData.mrp} onChange={handleChange} required />
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Selling Price (7 Ft)</label>
+          <label className="form-label">Selling Price (5 Ft)</label>
           <input type="number" className="form-control" name="sellingPrice" value={formData.sellingPrice} onChange={handleChange} required />
         </div>
 
