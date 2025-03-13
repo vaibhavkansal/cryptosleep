@@ -20,22 +20,22 @@ const MattressSection = () => {
       </div>
 
       {/* Pill-Shaped Button Group */}
-      <div className="flex justify-center space-x-3 my-5">
-        {categories.map((category, index) => (
-          <button
-            key={index}
-            onClick={() => handleCategoryClick(category)}
-            className={`px-5 py-2 rounded-full border transition duration-300 ${
-              activeCategory === category
-                ? 'bg-purple-700 text-white border-purple-700 shadow-md'
-                : 'bg-white text-purple-700 border-purple-300 hover:bg-purple-100'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+
+      <div className="relative w-full my-5">
+        <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide space-x-3 px-3">
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => handleCategoryClick(category)}
+              className={`px-5 py-2 rounded-full border transition duration-300 ${
+                activeCategory === category
+                  ? 'bg-purple-700 text-white border-purple-700 shadow-md'
+                  : 'bg-white text-purple-700 border-purple-300 hover:bg-purple-100'
+              }`}>{category}</button>))}
+        </div>
       </div>
 
+     
       {/* Filtered Cards Section */}
       <div className="m-5">
         <MattressFilterCards category={activeCategory} />

@@ -212,11 +212,11 @@ const Header = (props) => {
                 <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <ul className="offcanvas-body navbar-nav justify-content-md-end   ">
-                <li className="nav-item"><Link className={`nav-link mx-2 fw-bold ${isActive("/") ? "active" : ""}`} to="/">Home</Link></li>
-                <li className="nav-item"><Link className={`nav-link mx-2 fw-bold ${isActive("/mattress") ? "active" : ""}`} to="/mattress">Mattress</Link></li>
-                <li className="nav-item"><Link className={`nav-link mx-2 fw-bold ${isActive("/curtain") ? "active" : ""}`} to="/curtain">curtain</Link></li>
-                <li className="nav-item"><Link className={`nav-link mx-2 fw-bold ${isActive("/furniture") ? "active" : ""}`} to="/furniture">furniture</Link></li>
-                <li className="nav-item"><Link className={`nav-link mx-2 fw-bold ${isActive("/about") ? "active" : ""}`} to="/about">about</Link></li>
+                <li className="nav-item"  data-bs-dismiss="offcanvas"><Link className={`nav-link mx-2 fw-bold ${isActive("/") ? "active" : ""}`} to="/" >Home</Link></li>
+                <li className="nav-item"  data-bs-dismiss="offcanvas"><Link className={`nav-link mx-2 fw-bold ${isActive("/mattress") ? "active" : ""}`} to="/mattress">Mattress</Link></li>
+                <li className="nav-item"  data-bs-dismiss="offcanvas"><Link className={`nav-link mx-2 fw-bold ${isActive("/curtain") ? "active" : ""}`} to="/curtain">curtain</Link></li>
+                <li className="nav-item"  data-bs-dismiss="offcanvas"><Link className={`nav-link mx-2 fw-bold ${isActive("/furniture") ? "active" : ""}`} to="/furniture">furniture</Link></li>
+                <li className="nav-item"  data-bs-dismiss="offcanvas"><Link className={`nav-link mx-2 fw-bold ${isActive("/about") ? "active" : ""}`} to="/about">about</Link></li>
                 
             </ul>
         </div>
