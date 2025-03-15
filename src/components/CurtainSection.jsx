@@ -35,7 +35,7 @@ const MattressSection = () => {
       </div>
 
       {/* Filtered Cards Section */}
-      <div className="m-5">
+      <div className="m-1 md:m-5">
         <CurtainFilterCards category={activeCategory} />
       </div>
     </div>

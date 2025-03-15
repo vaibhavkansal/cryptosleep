@@ -25,10 +25,10 @@ const Cards = (props  ) => {
         />
       </div>   
        <div className="card-body mx-2">
-          <h5 className="card-title">{name}</h5>
+          <h5 className="card-title line-clamp-2">{name}</h5>
           <Star review={review}/>
 
-          <p className="card-text">{about}</p>
+          <p className="card-text line-clamp-3">{about}</p>
           <div className='flex flex-col justify-between'>
               <div className='flex'>
               <div className="product-pricing">

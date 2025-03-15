@@ -8,8 +8,13 @@ import { v4 as uuidv4 } from "uuid";
 import { app } from "../utils/customfirebase";
 import { Blankspace } from "./subcomponents/OtherComponent";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import * as XLSX from 'xlsx';
+
+
 
 const CurtainUploadSection = () => {
+    const products = useSelector((state) => state.products);
   const [formData, setFormData] = useState({
     id: `CUR-${uuidv4().slice(0, 8)}`,
     image: null,
@@ -38,6 +43,7 @@ const CurtainUploadSection = () => {
   const db = getFirestore(app);
   const storage = getStorage(app);
   const navigate = useNavigate();
+  
 
   // Handle input change
   const handleChange = (e) => {
@@ -161,12 +167,34 @@ const CurtainUploadSection = () => {
     }
   };
 
+  function downloadProduct(){
+    console.log(products);
+    
+    // Convert category and otherImages to comma-separated strings
+    const formattedProducts = products.map(product => ({
+      ...product,
+      category: product.category.length > 0 ? product.category.join(", ") : "",
+      otherImages: product.otherImages.length > 0 ? product.otherImages.join(", ") : ""
+    }));
+
+    // Convert JSON data to worksheet
+    const worksheet = XLSX.utils.json_to_sheet(formattedProducts);
+    // Create workbook and append the worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+
+    // Save Excel file
+    XLSX.writeFile(workbook, "products.xlsx");
+
+  }
+
   return (
     <div className="container mt-5">
       <Blankspace/>
       <div className="flex justify-between">
       <h1>Upload Product</h1>
-      <button className="btn btn-primary"onClick={()=>{navigate("/itemlist")}}>View Item List</button>
+      <button className="btn btn-primary" onClick={()=>{navigate("/itemlist")}}>View Item List</button>
+      <button className="btn btn-primary" onClick={downloadProduct}>Download</button>
       </div>
      
       <form onSubmit={handleSubmit}>
